@@ -1,0 +1,52 @@
+buildAndroid()
+{
+cd $(dirname $0)/Source
+
+if [ -e libraryAndroid.mak ] ; then
+mv library.mak librarytmp.mak
+mv libraryAndroid.mak library.mak
+fi
+
+make distclean
+
+CXXFLAGS=-D__STDC_CONSTANT_MACROS ./configure --enable-shared \
+--target-os=linux \
+--enable-cross-compile \
+--enable-runtime-cpudetect \
+--disable-asm \
+--arch=$ARC \
+--cross-prefix=$PREBUILT/bin/arm-linux-androideabi- \
+--sysroot=$PLATFORM \
+--disable-symver \
+--disable-doc \
+--disable-encoders \
+--disable-hwaccels \
+--disable-muxers
+
+make clean
+make
+MAKERET=$?
+
+mv library.mak libraryAndroid.mak
+mv librarytmp.mak library.mak
+
+cd ..
+
+if [ $MAKERET == 0 ] ; then
+copylib
+fi
+}
+
+copylib()
+{
+DESTDIR=libs/Android_$ARC
+if [ -e $DESTDIR ] ; then
+rm -r $DESTDIR
+fi
+
+mkdir $DESTDIR
+cp -R Source/libavutil/*.so* $DESTDIR
+cp -R Source/libavcodec/*.so* $DESTDIR
+cp -R Source/libavformat/*.so* $DESTDIR
+cp -R Source/libswscale/*.so* $DESTDIR
+}

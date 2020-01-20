@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/indicator">
+        <file alias="indicator">img/indicator/proc_indicate.png</file>
+    </qresource>
+</RCC>

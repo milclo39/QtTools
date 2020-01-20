@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>taro.jpg</file>
+        <file>-.png</file>
+        <file>+.png</file>
+        <file>fl_off.png</file>
+        <file>fl_on.png</file>
+        <file>ohc.png</file>
+        <file>pc.png</file>
+    </qresource>
+</RCC>
