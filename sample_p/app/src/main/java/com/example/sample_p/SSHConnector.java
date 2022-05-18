@@ -1,62 +1,66 @@
 package com.example.sample_p;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
-import java.nio.charset.StandardCharsets;
+import android.os.AsyncTask;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Properties;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 /**
- * Telnet接続用クラス
+ * SSH接続用クラス
  */
-public class SSHConnector implements Closeable {
-
+public class SSHConnector extends AsyncTask<Void, Void, String> {
 	private Session session;
-
 	private ChannelExec channel;
+	MainActivity main_ = null;
+	String ret = null;
 
-	public SSHConnector (String host, String userName, String password, int port) {
-		try {
-			JSch jsch = new JSch();
-			jsch.setKnownHosts("C:\\Users\\yura\\.ssh\\known_hosts");
-			session = jsch.getSession(userName, host, port);
-			session.setPassword(password);
-			session.connect();
-			channel = (ChannelExec)session.openChannel("exec");
-		} catch (JSchException e) {
-			// 例外時の処理
-		}
-	}
-
-    public int execute(String command) throws Exception {
-    	// コマンド実行する。
-    	this.channel.setCommand(command);
-    	channel.connect();
-    	// エラーメッセージ用Stream
-        BufferedInputStream errStream = new BufferedInputStream(channel.getErrStream());
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buf = new byte[1024];
-        while (true) {
-            int len = errStream.read(buf);
-            if (len <= 0) {
-                break;
-            }
-            outputStream.write(buf, 0, len);
-        }
-        // エラーメッセージ取得する
-        String message = new String(outputStream.toByteArray(), StandardCharsets.UTF_8);
-        channel.disconnect();
-        // コマンドの戻り値を取得する
-        int returnCode = channel.getExitStatus();
-        return  returnCode;
-    }
+	SSHConnector(MainActivity mainActivity){main_ = mainActivity;}
 
 	@Override
-	public void close() {
-		session.disconnect();
+	protected String doInBackground(Void... params) {
+		try {
+			JSch jsch = new JSch();
+			session = jsch.getSession(main_.strUser, main_.strHost, main_.nPort);
+			session.setPassword(main_.strPass);
+			Properties prop = new Properties();
+			prop.put("StrictHostKeyChecking", "no");
+			session.setConfig(prop);
+			session.connect();
+			// コマンド送信
+			channel = (ChannelExec)session.openChannel("exec");
+			channel.setCommand(main_.strCommand);
+			channel.setErrStream(System.err);
+			channel.connect();
+			// 受信処理
+			BufferedReader reader = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+			channel.disconnect();
+			session.disconnect();
+			int returnCode = channel.getExitStatus();	// コマンドの戻り値を取得する
+			System.out.println(returnCode);
+			ret = "OK!";
+		} catch (JSchException e) {
+			e.printStackTrace();
+			ret = "error!";
+		} catch (Exception e) {
+			e.printStackTrace();
+			ret = "error!";
+		}
+		return ret;
+	}
+
+	@Override
+	protected void onPostExecute(String result) {
+		super.onPostExecute(result);
+		// doInBackground後処理
+		main_.showToast(result);
 	}
 }

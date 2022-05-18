@@ -11,6 +11,11 @@ public class MainActivity extends AppCompatActivity {
     HttpRequestAsync http = null;
     TelnetConnector telnet = null;
     SSHConnector ssh = null;
+    String strUser;
+    String strHost;
+    Integer nPort;
+    String strPass;
+    String strCommand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
         btnSSH.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                try {
-                    ssh = new SSHConnector("192.168.1.99","pino","",22);
-                    ssh.execute("test");
-                } catch (Exception e) {
-                }
+                strUser = "muchida";
+                strHost = "192.168.1.126";
+                nPort = 22;
+                strPass = "Th12040228";
+                strCommand = "ipconfig";
+                setSSHAsync();
+                ssh.execute();
             }
         });
     }
@@ -51,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setTelnetAsync(){
         telnet = new TelnetConnector(this);
+    }
+    private void setSSHAsync(){
+        ssh = new SSHConnector(this);
     }
 
     public void showToast (String result){

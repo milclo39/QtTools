@@ -2,11 +2,9 @@ package com.example.sample_p;
 
 import android.os.AsyncTask;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.UnknownHostException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,12 +53,6 @@ public class TelnetConnector extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        // doInBackground前処理
-    }
-
-    @Override
     protected String doInBackground(Void... params) {
         Socket socket = null;
         OutputStream os = null;
@@ -78,18 +70,15 @@ public class TelnetConnector extends AsyncTask<Void, Void, String> {
             if (port == DEFAULT_TELNET_PORT) {
                 negotiation(os, is);
             }
-
-            StreamConnector stdinToSocket = new StreamConnector(System.in, os);
-            StreamConnector socketToStdout = new StreamConnector(is, System.out);
-
-            Thread input = new Thread(stdinToSocket);
-            Thread output = new Thread(socketToStdout);
-
-            input.start();
-            output.start();
-//            String str = "ls -l\r\n";
-//            byte[] outputInBytes = str.getBytes(StandardCharsets.UTF_8);
-//            System.in.read(outputInBytes, 0, 7);
+            // コマンド送信
+            String str = "ifconfig"+"/n";
+            os.write(str.getBytes());
+            // 受信処理
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
             returnString = "OK!";
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -101,47 +90,10 @@ public class TelnetConnector extends AsyncTask<Void, Void, String> {
         return returnString;
     }
 
-    /**
-     * ストリームの読み書きクラス
-     */
-    class StreamConnector implements Runnable {
-
-        private InputStream is = null;
-        private OutputStream os = null;
-
-        public StreamConnector(InputStream in, OutputStream out) {
-            this.is = in;
-            this.os = out;
-        }
-
-        @Override
-        public void run() {
-            byte[] buff = new byte[1024];
-            try {
-                while (true) {
-                    int n = is.read(buff);
-                    if (n > 0) {
-                        os.write(buff, 0, n);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace(System.out);
-                System.out.println("入出力の書き込み中に例外が発生しました");
-                System.exit(1);
-            }
-        }
-    }
-
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         // doInBackground後処理
         main_.showToast(result);
-    }
-
-    private static String getNowDate(){
-        final DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        final Date date = new Date(System.currentTimeMillis());
-        return df.format(date);
     }
 }

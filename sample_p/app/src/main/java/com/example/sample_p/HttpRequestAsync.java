@@ -34,7 +34,8 @@ public class HttpRequestAsync extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         HttpURLConnection con = null;
         URL url = null;
-        String mstdnURL = "http://192.168.42.1/mjpeg/image.jpg";
+        String mstdnURL = "http://httpbin.org/post";
+        String strCommand = "{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"getFWVersion\",\"params\":[]}";
         String returnString = null;
 
         try{
@@ -45,19 +46,12 @@ public class HttpRequestAsync extends AsyncTask<Void, Void, String> {
             con.setDoInput(true);
             con.setDoOutput(true);
 
-            // https://stackoverflow.com/questions/20020902/android-httpurlconnection-how-to-set-post-data-in-http-body/20021028
-            String ACCESS_TOKEN = "ここにアクセストークンを入れる";
-
-            String TOOT = "#にょ by app \n"+getNowDate();
-
             //header
-            con.setRequestProperty("Authorization", "Bearer "+ACCESS_TOKEN);
+//            con.setRequestProperty("Authorization", "Bearer nantokatoken");
 
             //body
-            String str = String.format("status=%s&visibility=unlisted", TOOT);
-            byte[] outputInBytes = str.getBytes(StandardCharsets.UTF_8);
             OutputStream os = con.getOutputStream();
-            os.write( outputInBytes );
+            os.write(strCommand.getBytes(StandardCharsets.UTF_8));
             os.close();
 
             //接続
@@ -66,24 +60,18 @@ public class HttpRequestAsync extends AsyncTask<Void, Void, String> {
             //レスポンス
             int status = con.getResponseCode();
             switch(status){
-                case HttpURLConnection.HTTP_OK:
-                    returnString = "OK!";
-                    break;
-
-                default:
-                    returnString = "ERROR!";
-
-                    InputStream in = con.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                    String line;
-                    String readStr = new String();
-
-                    while (null != (line = reader.readLine())){
-                        readStr += line;
-                    }
-
-                    Log.d("Error", readStr);
-                    in.close();
+            case HttpURLConnection.HTTP_OK:
+                returnString = "OK!";
+                break;
+            default:
+                returnString = "ERROR!";
+                break;
+            }
+            // 受信処理
+            BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
