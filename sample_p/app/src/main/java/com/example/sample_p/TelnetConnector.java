@@ -2,14 +2,14 @@ package com.example.sample_p;
 
 import android.os.AsyncTask;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.UnknownHostException;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+
+import org.apache.commons.net.telnet.TelnetClient;
 
 /**
  * Telnet接続用クラス
@@ -54,7 +54,7 @@ public class TelnetConnector extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
-        Socket socket = null;
+        TelnetClient socket = null;
         OutputStream os = null;
         BufferedInputStream is = null;
         String host = "192.168.1.99";
@@ -62,22 +62,33 @@ public class TelnetConnector extends AsyncTask<Void, Void, String> {
         String returnString = null;
 
         try {
-            socket = new Socket(host, port);
-            os = socket.getOutputStream();
-            is = new BufferedInputStream(socket.getInputStream());
+//            socket = new Socket(host, port);
+//            os = socket.getOutputStream();
+//            is = new BufferedInputStream(socket.getInputStream());
 
             // 23番ポートへの接続の場合ネゴシエーションを行う
-            if (port == DEFAULT_TELNET_PORT) {
-                negotiation(os, is);
-            }
+//            if (port == DEFAULT_TELNET_PORT) {
+//                negotiation(os, is);
+//            }
+            socket = new TelnetClient();
+            socket.connect(host,port);
+
             // コマンド送信
-            String str = "ifconfig"+"/n";
-            os.write(str.getBytes());
+            String str = "ifconfig"+"\n";
+            socket.getOutputStream().write(str.getBytes());
             // 受信処理
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+//            BufferedReader bufreader = new BufferedReader(reader);
+//            String line;
+//            while ((line = bufreader.readLine()) != null) {
+//                System.out.println(line);
+//            }
+            int n;
+            while((n = socket.getInputStream().available()) > 0){
+                byte[] buf = new byte[n];
+                socket.getInputStream().read(buf, 0, n);
+                String str2 = new String(buf);
+                System.out.println(str2);
+                Thread.sleep(100);
             }
             returnString = "OK!";
         } catch (UnknownHostException e) {
@@ -86,6 +97,8 @@ public class TelnetConnector extends AsyncTask<Void, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
             returnString = "ERROR!";
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return returnString;
     }
