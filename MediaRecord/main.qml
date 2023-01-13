@@ -24,6 +24,7 @@ Window {
     Camera { id: camera }
     AudioInput { id: audioInput; muted: false }
     ImageCapture { id: imageCapture }
+//    ScreenCapture { id: screenCapture }
     MediaDevices { id: mediaDevices }
 
     CaptureSession {
@@ -32,6 +33,7 @@ Window {
         audioInput: audioInput
         camera: camera
         imageCapture: imageCapture
+//        screenCapture : screenCapture
         videoOutput: videoOutput
     }
 
@@ -53,6 +55,13 @@ Window {
     Column {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
+        ComboBox {
+            id: comboBox
+            model: mediaDevices.videoInputs
+            displayText: typeof currentValue === 'undefined' ? "Unavailable" : currentValue.description
+            textRole: "description"
+            onCurrentValueChanged: if (typeof comboBox.currentValue !== 'undefined') camera.cameraDevice = currentValue
+        }
         Button {
             text: "Record"
             onClicked: recorder.record()
@@ -69,7 +78,6 @@ Window {
                 recorder.quality = MediaRecorder.VeryHighQuality
                 recorder.mediaFormat.videoCodec = MediaFormat.H264
                 recorder.mediaFormat.audioCodec = MediaFormat.AAC
-                console.log(camera.cameraFormat.resolution)
             }
         }
     }
