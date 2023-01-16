@@ -19,6 +19,7 @@
 #include "Transcode.h"
 
 HRESULT CreateMediaSource(const WCHAR *sURL, IMFMediaSource** ppMediaSource);
+HRESULT CreateVideoSource(IMFMediaSource** ppMediaSource);
 
 //-------------------------------------------------------------------
 //  CTranscoder constructor
@@ -70,6 +71,12 @@ HRESULT CTranscoder::OpenFile(const WCHAR *sURL)
 
     // Create the media source.
     hr = CreateMediaSource(sURL, &m_pSource);
+
+    // Create the camera source.
+    if (FAILED(hr))
+    {	// ファイルがなければカメラを使う
+        hr = CreateVideoSource(&m_pSource);
+    }
 
     //Create the media session.
     if (SUCCEEDED(hr))
@@ -530,4 +537,51 @@ HRESULT CreateMediaSource(
     SafeRelease(&pSourceResolver);
     SafeRelease(&pUnkSource);
     return hr;
+}
+
+HRESULT CreateVideoSource(IMFMediaSource **source) {
+	IMFMediaSource *src;
+	IMFAttributes *attr;
+	IMFActivate **devices;
+	HRESULT hr;
+	UINT32 i, count;
+
+	*source = NULL;
+
+	src = NULL;
+	attr = NULL;
+	devices = NULL;
+	count = 0;
+
+	hr = MFCreateAttributes(&attr, 1);
+	if (FAILED(hr)) goto done;
+
+	hr = attr->SetGUID(
+		MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE,
+		MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_GUID);
+	if (FAILED(hr)) goto done;
+
+	hr = MFEnumDeviceSources(attr, &devices, &count);
+	if (FAILED(hr)) goto done;
+
+	if (count == 0) {
+		hr = E_FAIL;
+		goto done;
+	}
+
+	hr = devices[0]->ActivateObject(IID_PPV_ARGS(&src));
+	if (FAILED(hr)) goto done;
+
+	*source = src;
+
+done:
+	SafeRelease(&attr);
+
+	for (i = 0; i < count; i++) {
+		SafeRelease(&devices[i]);
+	}
+
+	CoTaskMemFree(devices);
+
+	return hr;
 }
