@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>944</width>
+    <height>773</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <widget class="QTextEdit" name="textEdit_log"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_clear">
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutStream">
+      <item>
+       <layout class="QVBoxLayout" name="layoutStreamRaw">
+        <item>
+         <widget class="QPushButton" name="pushStartStreamRaw">
+          <property name="text">
+           <string>StartStreamRaw</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushStopStreamRaw">
+          <property name="text">
+           <string>StopStreamRaw</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushStartStreamRawV2">
+          <property name="text">
+           <string>StartStreamRaw V2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushStopStreamRawV2">
+          <property name="text">
+           <string>StopStreamRaw V2</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutStreamJpeg">
+        <item>
+         <widget class="QPushButton" name="pushStartStreamJpeg">
+          <property name="text">
+           <string>StartStreamJpeg</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushStopStreamJpeg">
+          <property name="text">
+           <string>StopStreamJpeg</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushStartStreamJpegV2">
+          <property name="text">
+           <string>StartStreamJpeg V2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushStopStreamJpegV2">
+          <property name="text">
+           <string>StopStreamJpeg V2</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutPause">
+        <item>
+         <widget class="QPushButton" name="pushPauseRaw">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>pause Raw</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushPauseJpeg">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>pause Jpeg</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutFrate">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Raw</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushGetFRateRaw">
+          <property name="text">
+           <string>getFrameRate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushSetFRateRaw">
+          <property name="text">
+           <string>setFrameRate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Jpeg</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushGetFRateJpeg">
+          <property name="text">
+           <string>getFrameRate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushSetFRateJpeg">
+          <property name="text">
+           <string>setFrameRate</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutFrate2">
+        <item>
+         <widget class="QLineEdit" name="lineEditUploadFilePathV2"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushRefUploadFileV2">
+          <property name="text">
+           <string>Ref Upload Jpg File</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboDevTypeV2">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>SD</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>USB memory</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushSendFileInfoV2">
+          <property name="text">
+           <string>Send File Info</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushUploadJpgV2">
+          <property name="text">
+           <string>Upload Jpg V2</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutCapture">
+        <item>
+         <widget class="QPushButton" name="pushCaptureRaw">
+          <property name="text">
+           <string>CaptureRaw</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushCaptureJpeg">
+          <property name="text">
+           <string>CaptureJpeg</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushCaptureRawV2">
+          <property name="text">
+           <string>CaptureRaw V2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushCaptureJpegV2">
+          <property name="text">
+           <string>CaptureJpeg V2</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutInfo">
+      <item>
+       <layout class="QVBoxLayout" name="layoutCamInfo">
+        <item>
+         <widget class="QPushButton" name="pushModelName">
+          <property name="text">
+           <string>Model Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushModelversion">
+          <property name="text">
+           <string>Model Version</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushGetPresenterList">
+          <property name="text">
+           <string>getPresenterList</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutPictInfo">
+        <item>
+         <widget class="QPushButton" name="pushGetSize">
+          <property name="text">
+           <string>getSizePicture</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushGetRect">
+          <property name="text">
+           <string>getRectPicture</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushSetRect">
+          <property name="text">
+           <string>setRectPicture</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="pushPrintAllDevice">
+          <property name="text">
+           <string>print all devices</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboSize">
+          <item>
+           <property name="text">
+            <string>high</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>mid</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>low</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushButton_myCmdV1">
+          <property name="text">
+           <string>my command V1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_myCmdV2">
+          <property name="text">
+           <string>my command V2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_setSysTime">
+          <property name="text">
+           <string>System Time Set</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutCamcon">
+      <item>
+       <layout class="QVBoxLayout" name="layoutZoom">
+        <item>
+         <widget class="QPushButton" name="pushZoomTele">
+          <property name="text">
+           <string>ZoomTele</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushZoomWide">
+          <property name="text">
+           <string>ZoomWide</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushZoomStop">
+          <property name="text">
+           <string>ZoomStop</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutIris">
+        <item>
+         <widget class="QPushButton" name="pushIrisOpen">
+          <property name="text">
+           <string>Bright</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushIrisClose">
+          <property name="text">
+           <string>Dark</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushIrisStop">
+          <property name="text">
+           <string>IrisStop</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushIrisNormal">
+          <property name="text">
+           <string>IrisNormal</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutFocus">
+        <item>
+         <widget class="QPushButton" name="pushFocusNear">
+          <property name="text">
+           <string>Near</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushFocusFar">
+          <property name="text">
+           <string>Far</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushFocusStop">
+          <property name="text">
+           <string>FocusStop</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushFocusAuto">
+          <property name="text">
+           <string>AF</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutCamcon2">
+      <item>
+       <layout class="QVBoxLayout" name="layoutRotate">
+        <item>
+         <widget class="QPushButton" name="pushRotateOn">
+          <property name="text">
+           <string>RotateOn</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushRotateOff">
+          <property name="text">
+           <string>RotateOff</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutPosiNega">
+        <item>
+         <widget class="QPushButton" name="pushPosi">
+          <property name="text">
+           <string>Posi</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushNega">
+          <property name="text">
+           <string>Nega</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutColorBw">
+        <item>
+         <widget class="QPushButton" name="pushColor">
+          <property name="text">
+           <string>Color</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushBw">
+          <property name="text">
+           <string>BW</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutSlowShutter">
+        <item>
+         <widget class="QPushButton" name="pushSHOn">
+          <property name="text">
+           <string>SlowShutterOn</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushSHOff">
+          <property name="text">
+           <string>SlowShutterOff</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutImageMode">
+        <item>
+         <widget class="QPushButton" name="pushImageMode">
+          <property name="text">
+           <string>ImageMode</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboImageMode">
+          <item>
+           <property name="text">
+            <string>text1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>text2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>text3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>graphics1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>graphics2</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutMicroscope">
+        <item>
+         <widget class="QPushButton" name="pushMSOn">
+          <property name="text">
+           <string>MicroscopeOn</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushMSOff">
+          <property name="text">
+           <string>MicroscopeOff</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushGetV2">
+      <property name="text">
+       <string>GetV2</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboCommand"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>944</width>
+     <height>17</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

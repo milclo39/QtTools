@@ -6,6 +6,7 @@ Makefile
 *.objrelease
 *.user
 *.int
+.qtc_clangd
 debug
 release
 build-*/

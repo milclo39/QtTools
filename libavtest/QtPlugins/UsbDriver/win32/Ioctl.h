@@ -1,0 +1,33 @@
+﻿//	DeviceIoControl IOCTL codes
+
+#define USBDRIVE_IOCTL_INDEX  0x0800
+
+// パイプリセット要求
+#define IOCTL_USB_RESET_PIPE						\
+			CTL_CODE(FILE_DEVICE_UNKNOWN,			\
+						USBDRIVE_IOCTL_INDEX + 0,	\
+						METHOD_BUFFERED,			\
+						FILE_ANY_ACCESS)
+
+// ドライバログ取得要求
+#define IOCTL_USB_GETLOG							\
+			CTL_CODE(FILE_DEVICE_UNKNOWN,			\
+						USBDRIVE_IOCTL_INDEX + 1,	\
+						METHOD_BUFFERED,			\
+						FILE_ANY_ACCESS)
+
+// ドライバ状態取得要求
+#define IOCTL_USB_GET_STATUS						\
+			CTL_CODE(FILE_DEVICE_UNKNOWN,			\
+						USBDRIVE_IOCTL_INDEX + 3,	\
+						METHOD_BUFFERED,			\
+						FILE_ANY_ACCESS)
+
+// コンフィギュレーションディスクリプタ取得要求
+#define IOCTL_USB_GET_CONFIGURATION_DESCRIPTOR		\
+			CTL_CODE(FILE_DEVICE_UNKNOWN,			\
+						USBDRIVE_IOCTL_INDEX + 4,	\
+						METHOD_BUFFERED,			\
+						FILE_ANY_ACCESS)
+
+#define IMGMT_IOCTL_GETLOG	(4096)

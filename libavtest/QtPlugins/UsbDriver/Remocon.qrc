@@ -1,0 +1,50 @@
+<RCC>
+    <qresource prefix="/imgs/rsc">
+        <file>rsc/Btn_sys_exit_down.png</file>
+        <file>rsc/Btn_sys_exit_off.png</file>
+        <file>rsc/Btn_sys_exit_on.png</file>
+        <file>rsc/Btn_tool_remocon_AF_down.png</file>
+        <file>rsc/Btn_tool_remocon_AF_off.png</file>
+        <file>rsc/Btn_tool_remocon_AF_on.png</file>
+        <file>rsc/Btn_tool_remocon_far_down.png</file>
+        <file>rsc/Btn_tool_remocon_far_off.png</file>
+        <file>rsc/Btn_tool_remocon_far_on.png</file>
+        <file>rsc/Btn_tool_remocon_iris_close_down.png</file>
+        <file>rsc/Btn_tool_remocon_iris_close_off.png</file>
+        <file>rsc/Btn_tool_remocon_iris_close_on.png</file>
+        <file>rsc/Btn_tool_remocon_iris_normal_down.png</file>
+        <file>rsc/Btn_tool_remocon_iris_normal_off.png</file>
+        <file>rsc/Btn_tool_remocon_iris_normal_on.png</file>
+        <file>rsc/Btn_tool_remocon_iris_open_down.png</file>
+        <file>rsc/Btn_tool_remocon_iris_open_off.png</file>
+        <file>rsc/Btn_tool_remocon_iris_open_on.png</file>
+        <file>rsc/Btn_tool_remocon_near_down.png</file>
+        <file>rsc/Btn_tool_remocon_near_off.png</file>
+        <file>rsc/Btn_tool_remocon_near_on.png</file>
+        <file>rsc/Btn_tool_remocon_zoom_tele_down.png</file>
+        <file>rsc/Btn_tool_remocon_zoom_tele_off.png</file>
+        <file>rsc/Btn_tool_remocon_zoom_tele_on.png</file>
+        <file>rsc/Btn_tool_remocon_zoom_wide_down.png</file>
+        <file>rsc/Btn_tool_remocon_zoom_wide_off.png</file>
+        <file>rsc/Btn_tool_remocon_zoom_wide_on.png</file>
+    </qresource>
+    <qresource prefix="/" lang="ja">
+        <file alias="UsbDriver.qm">UsbDriver_ja.qm</file>
+    </qresource>
+    <qresource prefix="/" lang="en">
+        <file alias="UsbDriver.qm">UsbDriver_en.qm</file>
+    </qresource>
+    <qresource prefix="/" lang="ru">
+        <file alias="UsbDriver.qm">UsbDriver_ru.qm</file>
+    </qresource>
+    <qresource prefix="/" lang="zh">
+        <file alias="UsbDriver.qm">UsbDriver_zh.qm</file>
+    </qresource>
+    <qresource prefix="/" lang="fr">
+        <file alias="UsbDriver.qm">UsbDriver_fr.qm</file>
+    </qresource>
+    <qresource prefix="/" lang="de">
+        <file alias="UsbDriver.qm">UsbDriver_de.qm</file>
+    </qresource>
+</RCC>
+

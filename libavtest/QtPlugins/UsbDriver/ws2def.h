@@ -1,0 +1,1 @@
+﻿// dummy ws2def.h

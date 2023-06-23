@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ClMainWindow</class>
+ <widget class="QMainWindow" name="ClMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>641</width>
+    <height>111</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>RicohLibTester</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="clTabCmdType">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="clTabChildCameraTerminalControls">
+       <attribute name="title">
+        <string>Camera Terminal Controls</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="clLineEditPan"/>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QPushButton" name="clPushButtonGetPan">
+          <property name="text">
+           <string>Get Pan</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="clPushButtonSetPan">
+          <property name="text">
+           <string>Set Pan</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QPushButton" name="clPushButtonGetZoom">
+          <property name="text">
+           <string>Get Zoom</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="clPushButtonSetZoom">
+          <property name="text">
+           <string>Set Zoom</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLineEdit" name="clLineEditZoom"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="clTabChildVideoProsessingUnitControls">
+       <attribute name="title">
+        <string>Video Processing Unit Controls</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0" rowspan="2" colspan="2">
+         <widget class="QPushButton" name="clPushButtonGetBrightness">
+          <property name="text">
+           <string>Get Brightness</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" rowspan="2">
+         <widget class="QLineEdit" name="clLineEditBrightness"/>
+        </item>
+        <item row="0" column="2" rowspan="2">
+         <widget class="QPushButton" name="clPushButtonSetBrightness">
+          <property name="text">
+           <string>Set Brightness</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDockWidget" name="clDockWidgetLog">
+   <property name="windowTitle">
+    <string>Log</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QTextBrowser" name="clTextBrowserLog"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
